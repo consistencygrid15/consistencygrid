@@ -1,0 +1,86 @@
+{
+  "name": "Consistency Grid - Track Goals, Build Habits, Stay Accountable",
+  "short_name": "Consistency Grid",
+  "description": "A comprehensive goal-tracking and habit-building app to help you achieve your dreams with data-driven insights, community support, and accountability partnerships",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#f97316",
+  "background_color": "#ffffff",
+  "categories": [
+    "productivity",
+    "lifestyle"
+  ],
+  "screenshots": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "form_factor": "narrow",
+      "type": "image/png"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your goals and streaks",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "/images/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Create Goal",
+      "short_name": "New Goal",
+      "description": "Create a new goal",
+      "url": "/goals?action=create",
+      "icons": [
+        {
+          "src": "/images/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "View Habits",
+      "short_name": "Habits",
+      "description": "Track your daily habits",
+      "url": "/habits",
+      "icons": [
+        {
+          "src": "/images/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/api/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "iarc_rating_id": ""
+}

@@ -1,0 +1,57 @@
+{
+  "name": "consistencygrid",
+  "version": "0.1.1",
+  "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev ",
+    "build": "next build",
+    "postinstall": "prisma generate",
+    "start": "next start",
+    "lint": "eslint",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:e2e": "cypress run --headless",
+    "test:e2e:watch": "cypress open",
+    "test:e2e:chrome": "cypress run --browser chrome",
+    "test:e2e:firefox": "cypress run --browser firefox",
+    "test:e2e:edge": "cypress run --browser edge"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.19.2",
+    "@sentry/nextjs": "^10.43.0",
+    "@sentry/tracing": "^7.120.4",
+    "bcryptjs": "^3.0.3",
+    "canvas": "^3.2.1",
+    "firebase-admin": "^13.7.0",
+    "google-auth-library": "^10.5.0",
+    "lucide-react": "^0.562.0",
+    "next": "16.1.1",
+    "next-auth": "^4.24.13",
+    "nodemailer": "^7.0.12",
+    "prisma": "^6.19.2",
+    "razorpay": "^2.9.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-hot-toast": "^2.6.0",
+    "recharts": "^3.6.0",
+    "resend": "^6.8.0",
+    "stripe": "^20.4.0",
+    "swr": "^2.4.1",
+    "web-vitals": "^5.1.0"
+  },
+  "devDependencies": {
+    "@cypress/schematic": "^5.0.0",
+    "@cypress/webpack-dev-server": "^5.6.0",
+    "@tailwindcss/postcss": "^4",
+    "babel-plugin-react-compiler": "1.0.0",
+    "cypress": "^15.9.0",
+    "cypress-social-logins": "^1.14.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.1",
+    "tailwindcss": "^4"
+  }
+}

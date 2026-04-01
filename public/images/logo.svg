@@ -1,0 +1,27 @@
+<svg viewBox="0 0 512 384" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF7A00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E63900;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D62800;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Left C shape -->
+  <path d="M 120 100 Q 40 100, 40 192 Q 40 284, 120 284 L 120 252 Q 80 252, 80 192 Q 80 132, 120 132 Z" 
+    fill="url(#grad1)" />
+  
+  <!-- Right top C shape -->
+  <path d="M 392 100 Q 312 100, 312 192 L 352 192 Q 352 132, 392 132 Q 432 132, 432 192 Q 432 252, 392 252 L 392 284 Q 472 284, 472 192 Q 472 100, 392 100 Z" 
+    fill="url(#grad2)" />
+  
+  <!-- Center connector -->
+  <rect x="200" y="168" width="112" height="48" fill="url(#grad3)" rx="8" />
+</svg>

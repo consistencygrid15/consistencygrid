@@ -1,0 +1,288 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  name        String?
+  email       String   @unique
+  password    String?  // Hashed password for credentials auth
+  image       String?
+  publicToken String   @unique
+  emailVerified DateTime?
+  onboarded   Boolean  @default(false)
+  
+  // Verification fields
+  verificationToken       String?   @unique
+  verificationTokenExpiry DateTime?
+  
+  // Password reset fields (for forgot password feature)
+  resetToken    String?   @unique // Single-use token for password reset
+  resetTokenExpiry DateTime? // Token expires after 15 minutes
+  
+  // Subscription fields
+  plan        String   @default("free") // "free", "pro_monthly", "pro_yearly", "lifetime"
+  paymentProvider String? // "razorpay", "stripe"
+  stripeCustomerId String?
+  stripeSubscriptionId String?
+  subscriptionStatus String? // "active", "canceled", "past_due"
+  subscriptionStartDate DateTime?
+  subscriptionEndDate DateTime?
+  trialEndDate DateTime? // For free trial tracking
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  settings         WallpaperSettings?
+  consentPreferences ConsentPreference?
+  habits           Habit[]
+  habitLogs        HabitLog[]
+  reminders        Reminder[]
+  goals            Goal[]
+  milestones       Milestone[]
+  paymentTransactions PaymentTransaction[]
+  deviceTokens     DeviceToken[]
+}
+
+// ✅ FCM Device Tokens for Push Notifications
+model DeviceToken {
+  id         String   @id @default(cuid())
+  userId     String
+  token      String   @unique // FCM Registration Token
+  deviceType String   @default("android") // "android", "ios", "web"
+  timezone   String   @default("UTC") // e.g., "Asia/Kolkata" - Used for midnight cron
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([timezone]) // 🔥 Crucial for querying 100k users whose timezone is exactly midnight
+}
+
+model WallpaperSettings {
+  id     String   @id @default(cuid())
+  userId String   @unique
+  dob    DateTime
+
+  lifeExpectancyYears Int @default(80)
+
+  theme  String @default("dark-minimal")
+  width  Int    @default(1080)
+  height Int    @default(2400)
+
+  showLifeGrid Boolean @default(true)
+  showYearGrid Boolean @default(true)
+  showAgeStats Boolean @default(true)
+
+  showQuote Boolean @default(false)
+  quote     String?
+
+  goalEnabled      Boolean   @default(false)
+  goalTitle        String?
+  goalStartDate    DateTime?
+  goalDurationDays Int?
+  goalUnit         String?
+  
+  // ✅ New Layout Fields
+  yearGridMode   String  @default("weeks") // "weeks" or "days"
+  wallpaperType  String  @default("lockscreen") // "lockscreen", "homescreen", "calendar"
+  
+  showMissedDays Boolean @default(false)
+  showHabitLayer Boolean @default(false)
+  showLegend     Boolean @default(false)
+
+  // ✅ Custom Background Photo
+  customBackgroundUrl String? // URL or base64 data URL of the user's custom background image
+
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Habit {
+  id            String   @id @default(cuid())
+  userId        String
+  title         String
+  scheduledTime String?  // e.g., "09:00 AM", "2:30 PM"
+  isActive      Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logs HabitLog[]
+
+  @@index([userId])
+  @@index([userId, isActive])
+}
+
+model HabitLog {
+  id      String @id @default(cuid())
+  habitId String
+  userId  String
+
+  date DateTime // "YYYY-MM-DD" like
+  done Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  habit Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+  @@index([habitId, date])
+}
+
+// ✅ Intelligent Reminder System
+// This model enables reminders to live on the timeline, not just notify
+model Reminder {
+  id     String @id @default(cuid())
+  userId String
+
+  // Basic Info
+  title       String
+  description String?
+
+  // Flexible Duration Support
+  startDate DateTime // Start date of the reminder
+  endDate   DateTime // End date (same as startDate for single-day reminders)
+
+  // Time Range (optional - for non-full-day reminders)
+  startTime String? // e.g., "09:00" (24-hour format)
+  endTime   String? // e.g., "17:00" (24-hour format)
+  isFullDay Boolean @default(true) // If true, reminder is active all day
+
+  // Visual Presence on Grid
+  markerType  String @default("dot") // "dot", "border", "fill", "badge"
+  markerColor String @default("#ff7a00") // Hex color for the marker
+  markerIcon  String? // Optional emoji or icon identifier
+
+  // Priority & Importance
+  priority Int @default(1) // 1=low, 2=medium, 3=high, 4=critical
+  isImportant Boolean @default(false) // Marks as "Important Day"
+
+  // Notification Behavior
+  enableNotifications Boolean @default(true)
+  notifyOnStart       Boolean @default(true) // Notify when reminder period starts
+  notifyDaily         Boolean @default(false) // For multi-day reminders, notify each day
+
+  // Recurrence (future feature)
+  isRecurring    Boolean @default(false)
+  recurrenceRule String? // e.g., "DAILY", "WEEKLY", "MONTHLY"
+
+  // Metadata
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, startDate])
+  @@index([userId, endDate])
+}
+
+model Goal {
+  id              String    @id @default(cuid())
+  userId          String
+  title           String
+  category        String    @default("General") // "Health", "Wealth", "Mind", "Work", "Life Milestone"
+  description     String?   // Optional description of the goal
+  progress        Int       @default(0) // 0-100 calculated from subgoals
+  
+  targetDeadline  DateTime?
+  age             Int?      // Target age for Life Milestone category
+  isCompleted     Boolean   @default(false)
+  isPinned        Boolean   @default(false) // NEW: Pin goal to show on wallpaper
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subGoals        SubGoal[]
+
+  @@index([userId])
+  @@index([userId, isCompleted])
+  @@index([userId, isPinned])
+}
+
+model SubGoal {
+  id          String   @id @default(cuid())
+  goalId      String
+  title       String
+  isCompleted Boolean  @default(false)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  goal        Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+}
+
+model Milestone {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  age         Int
+  status      String   @default("future") // "achieved", "targeting", "future"
+  description String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ✅ Payment Transaction Tracking
+model PaymentTransaction {
+  id                String   @id @default(cuid())
+  userId            String
+  
+  // Provider details
+  provider          String   // "razorpay" or "stripe"
+  providerOrderId   String   @unique
+  providerPaymentId String?  @unique
+  
+  // Transaction details
+  amount            Int      // Amount in smallest currency unit (paise/cents)
+  currency          String   @default("INR")
+  plan              String   // Plan purchased: "free", "pro_monthly", "pro_yearly", "lifetime"
+  status            String   // "created", "success", "failed", "refunded"
+  
+  // Metadata
+  metadata          Json?    // Additional provider-specific data
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([providerOrderId])
+  @@index([status])
+}
+
+// ✅ GDPR Compliance - User Consent Preferences
+model ConsentPreference {
+  id                       String   @id @default(cuid())
+  userId                   String   @unique
+  
+  // Core Consents (Required for service)
+  data_processing          Boolean  @default(true) // Must be true to use service
+  
+  // Optional Consents
+  analytics                Boolean  @default(true) // Allow analytics tracking
+  marketing_emails         Boolean  @default(false) // Receive marketing communications
+  performance_monitoring   Boolean  @default(true) // Monitor app performance
+  
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+  
+  user                     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

@@ -1,0 +1,500 @@
+﻿
+> consistencygrid@0.1.1 lint
+> eslint
+
+
+D:\startup\consistencygrid\cypress\support\test-data.js
+  190:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+D:\startup\consistencygrid\src\app\app-login\page.js
+  14:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  12 |         // Detect Android
+  13 |         const ua = navigator.userAgent.toLowerCase();
+> 14 |         setIsAndroid(ua.indexOf("android") > -1);
+     |         ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  15 |
+  16 |         // Auto-redirect via Intent if on Android
+  17 |         if (token && ua.indexOf("android") > -1) {  react-hooks/set-state-in-effect
+  29:32  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\calendar\page.js
+  30:8  warning  React Hook useEffect has a missing dependency: 'loadReminders'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\startup\consistencygrid\src\app\forgot-password\page.js
+  56:71  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\help\page.js
+   83:43  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   83:48  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   97:49  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   97:59  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  108:49  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  141:32  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  141:48  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\mobile-auth-callback\page.js
+  32:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  30 |         if (!token) {
+  31 |             console.error("[mobile-auth-callback] publicToken missing");
+> 32 |             setShowFallback(true);
+     |             ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  33 |             return;
+  34 |         }
+  35 |  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\app\not-found.js
+  23:25  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  23:46  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\payment\failed\page.js
+  30:34  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  30:62  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\payment\success\page.js
+   97:45  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  160:37  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\pricing\page.js
+   30:7    error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  28 |     if (token && status === 'unauthenticated' && !isAutoLoggingIn) {
+  29 |       console.log('Auto-logging in with token...');
+> 30 |       setIsAutoLoggingIn(true);
+     |       ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  31 |
+  32 |       signIn('token-login', {
+  33 |         token,  react-hooks/set-state-in-effect
+   51:5    error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  49 |   // Detect platform on client side
+  50 |   useEffect(() => {
+> 51 |     setShowPaymentUI(shouldShowPaymentUI());
+     |     ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  52 |   }, []);
+  53 |
+  54 |   // Fetch user's current subscription                                                      react-hooks/set-state-in-effect
+  428:29   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react/no-unescaped-entities
+  490:120  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react/no-unescaped-entities
+  520:17   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react/no-unescaped-entities
+  530:84   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\privacy\page.js
+   32:34   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   32:38   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   32:40   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   32:44   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   32:49   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   32:53   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  133:167  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  133:180  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\reset-password\page.js
+  25:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  23 |     const t = searchParams.get('token');
+  24 |     if (!t) {
+> 25 |       setStatus('error');
+     |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  26 |       setMessage('No reset token provided. Please check your email link.');
+  27 |     } else {
+  28 |       setToken(t);  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\app\streaks\page.js
+  197:40  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  197:85  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\terms\page.js
+   32:57   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   32:69   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  104:47   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  104:53   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  104:59   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  104:72   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  114:247  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\app\w\[token]\PublicWallpaperClient.js
+   8:48  error    Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+   6 |
+   7 | export default function PublicWallpaperClient({ token, settings: s, ageYears, lifeProgress }) {
+>  8 |   const [refreshKey, setRefreshKey] = useState(Date.now());
+     |                                                ^^^^^^^^^^ Cannot call impure function
+   9 |   const [imageLoading, setImageLoading] = useState(true);
+  10 |
+  11 |   // Auto-refresh wallpaper every 10 seconds to show latest data  react-hooks/purity
+  54:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @next/next/no-img-element
+
+D:\startup\consistencygrid\src\app\w\[token]\PublicWallpaperClientCanvas.js
+  37:48  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  35 |   });
+  36 |
+> 37 |   const [refreshKey, setRefreshKey] = useState(Date.now());
+     |                                                ^^^^^^^^^^ Cannot call impure function
+  38 |
+  39 |   /**
+  40 |    * Update grid based on age  react-hooks/purity
+
+D:\startup\consistencygrid\src\app\wallpaper-renderer\page.js
+   71:8   warning  React Hook useEffect has a missing dependency: 'fetchDataAndRender'. Either include it or remove the dependency array                                            react-hooks/exhaustive-deps
+  233:13  warning  Custom fonts not added in `pages/_document.js` will only load for a single page. This is discouraged. See: https://nextjs.org/docs/messages/no-page-custom-font  @next/next/no-page-custom-font
+
+D:\startup\consistencygrid\src\components\CanvasWallpaperEngine.js
+  381:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  379 |   useEffect(() => {
+  380 |     // Initial render
+> 381 |     performRender();
+      |     ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  382 |     setIsReady(true);
+  383 |
+  384 |     // Schedule next update at top of next minute  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\components\CanvasWallpaperRenderer.js
+  286:48  warning  The ref value 'animationFrameRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'animationFrameRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+  289:6   warning  React Hook useEffect has missing dependencies: 'lastUpdate', 'loadBaseImage', and 'renderWallpaper'. Either include them or remove the dependency array                                                                                                                            react-hooks/exhaustive-deps
+
+D:\startup\consistencygrid\src\components\common\OptimizedImage.js
+  33:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  31 |   useEffect(() => {
+  32 |     if (!priority) {
+> 33 |       setIsLoading(true);
+     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  34 |     }
+  35 |   }, [priority]);
+  36 |  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\components\common\PWAInstallPrompt.js
+  19:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  17 |     // Check if app is already installed
+  18 |     if (window.navigator.standalone === true) {
+> 19 |       setIsInstalled(true);
+     |       ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  20 |       return;
+  21 |     }
+  22 |  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\components\common\PerformanceMonitor.js
+  35:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  33 |
+  34 |     // Initial update
+> 35 |     setMetrics(monitor.getMetrics());
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  36 |     setMemory(MemoryMonitor.getMemoryUsage());
+  37 |     setNetwork(NetworkMonitor.getNetworkType());
+  38 |  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\components\dashboard\BottomNav.js
+  52:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  50 |
+  51 |     useEffect(() => {
+> 52 |         setHasAndroidBridge(!!(window.Android && window.Android.saveWallpaperUrl));
+     |         ^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  53 |
+  54 |         async function loadToken() {
+  55 |             try {  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\components\dashboard\Sidebar.js
+  139:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+D:\startup\consistencygrid\src\components\dashboard\StreakBanner.js
+  40:51  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\dashboard\TodayProgressCard.js
+  137:69  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\dashboard\WallpaperCard.js
+  139:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+D:\startup\consistencygrid\src\components\generator\GeneratorPreview.js
+   86:8   warning  React Hook useEffect has a missing dependency: 'previewUrl'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/exhaustive-deps
+  240:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @next/next/no-img-element
+  241:81  error    Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  239 |                     ) : publicToken ? (
+  240 |                         <img
+> 241 |                             src={previewUrl || `/w/${publicToken}/image.png?t=${Date.now()}`}
+      |                                                                                 ^^^^^^^^^^ Cannot call impure function
+  242 |                             alt="Wallpaper Preview"
+  243 |                             className="w-full h-full object-cover transition-opacity duration-300"
+  244 |                         />  react-hooks/purity
+
+D:\startup\consistencygrid\src\components\generator\GeneratorPreviewWithCanvas.js
+   56:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  54 |     ctx.fillText(dateStr, width / 2, 160);
+  55 |
+> 56 |     setLastRender(now);
+     |     ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  57 |   }, [width, height, theme]);
+  58 |
+  59 |   return (  react-hooks/set-state-in-effect
+   85:48  error    Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  83 | export default function GeneratorPreviewWithCanvas({ publicToken, loading, form }) {
+  84 |   const [copied, setCopied] = useState(false);
+> 85 |   const [refreshKey, setRefreshKey] = useState(Date.now());
+     |                                                ^^^^^^^^^^ Cannot call impure function
+  86 |   const canvasContainerRef = useRef(null);
+  87 |   const imgRef = useRef(null);
+  88 |                                                                                                                                                                                                       react-hooks/purity
+  204:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @next/next/no-img-element
+
+D:\startup\consistencygrid\src\components\habits\HabitCard.js
+  131:6   warning  React Hook useCallback has a missing dependency: 'publicToken'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  152:6   warning  React Hook useCallback has a missing dependency: 'publicToken'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  163:57  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                   react/no-unescaped-entities
+  163:67  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                   react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\habits\TodayProgressCard.js
+  67:101  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\landing\LandingPage.js
+   13:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  11 |     useEffect(() => {
+  12 |         if (typeof window !== "undefined" && localStorage.getItem("cg_session_active") === "true") {
+> 13 |             setIsRecovering(true);
+     |             ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  14 |             // Limit recovery timeout - if it takes more than 5s, show landing anyway
+  15 |             const timer = setTimeout(() => setIsRecovering(false), 5000);
+  16 |             return () => clearTimeout(timer);  react-hooks/set-state-in-effect
+  200:65  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\layout\DashboardLayout.js
+  97:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+D:\startup\consistencygrid\src\components\layout\Navbar.js
+  45:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+D:\startup\consistencygrid\src\components\modals\UpgradePopup.js
+   13:5   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  11 |   const [isAndroid, setIsAndroid] = useState(false);
+  12 |   useEffect(() => {
+> 13 |     setIsAndroid(isAndroidApp());
+     |     ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  14 |   }, []);
+  15 |   return isAndroid;
+  16 | }  react-hooks/set-state-in-effect
+   70:16  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react/no-unescaped-entities
+  315:68  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react/no-unescaped-entities
+  317:16  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\onboarding\OnboardingHabits.js
+  203:63  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\onboarding\OnboardingPersonalize.js
+  86:14  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\onboarding\OnboardingWelcome.js
+   62:56  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  162:64  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\payment\UpgradeBanner.js
+  23:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  21 |
+  22 |     useEffect(() => {
+> 23 |         setShowPaymentUI(shouldShowPaymentUI());
+     |         ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  24 |     }, []);
+  25 |
+  26 |     if (!isVisible) return null;  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\components\payment\UpgradeButton.js
+  29:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  27 |
+  28 |     useEffect(() => {
+> 29 |         setShowPaymentUI(shouldShowPaymentUI());
+     |         ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  30 |     }, []);
+  31 |
+  32 |     const messages = getPlatformMessages();  react-hooks/set-state-in-effect
+
+D:\startup\consistencygrid\src\components\payment\UpgradePrompt.js
+  26:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  24 |
+  25 |     useEffect(() => {
+> 26 |         setShowPaymentUI(shouldShowPaymentUI());
+     |         ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  27 |     }, []);
+  28 |
+  29 |     if (!isOpen) return null;  react-hooks/set-state-in-effect
+  80:36  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\settings\AccountDeletionComponent.js
+  150:121  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\settings\DataExportComponent.js
+  144:51  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\settings\ExportDataNew.js
+  105:70  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\components\skeletons\AnalyticsSkeleton.js
+  46:136  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  44 |                 <div className="h-[300px] w-full flex items-end gap-2 pb-6 border-b border-l border-gray-100">
+  45 |                     {Array.from({ length: 30 }).map((_, i) => (
+> 46 |                         <div key={i} className="flex-1 bg-gray-50 flex items-end justify-center rounded-t-sm" style={{ height: `${20 + Math.random() * 60}%` }}>
+     |                                                                                                                                        ^^^^^^^^^^^^^ Cannot call impure function
+  47 |                             <div className="w-[40%] bg-gray-100/50 rounded-t-sm" style={{ height: '100%' }} />
+  48 |                         </div>
+  49 |                     ))}  react-hooks/purity
+
+D:\startup\consistencygrid\src\components\streaks\StreakHeatmap.js
+  145:33  error    Compilation Skipped: Existing memoization could not be preserved
+
+React Compiler has skipped optimizing this component because the existing manual memoization could not be preserved. The inferred dependencies did not match the manually specified dependencies, which could cause the value to change more or less frequently than expected. The inferred dependency was `getMonthLabels`, but the source dependencies were [heatmapData]. Inferred different dependency than source.
+
+  143 |     };
+  144 |
+> 145 |     const monthLabels = useMemo(() => getMonthLabels(), [heatmapData]);
+      |                                 ^^^^^^^^^^^^^^^^^^^^^^ Could not preserve existing manual memoization
+  146 |
+  147 |     if (!habits || habits.length === 0) {
+  148 |         return (  react-hooks/preserve-manual-memoization
+  145:57  warning  React Hook useMemo has a missing dependency: 'getMonthLabels'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/exhaustive-deps
+  322:44  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react/no-unescaped-entities
+
+D:\startup\consistencygrid\src\lib\api-cache.js
+  239:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+D:\startup\consistencygrid\src\lib\cache-invalidation.js
+  134:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+D:\startup\consistencygrid\src\lib\db-optimization.js
+  286:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+D:\startup\consistencygrid\src\lib\platform-utils.js
+  226:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+D:\startup\consistencygrid\src\lib\pwa.js
+  262:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+D:\startup\consistencygrid\src\lib\sentry.js
+  118:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+D:\startup\consistencygrid\src\lib\subscription-middleware.js
+  205:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+D:\startup\consistencygrid\src\lib\subscription-utils.js
+  336:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+Γ£û 101 problems (76 errors, 25 warnings)
+

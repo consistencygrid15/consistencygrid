@@ -1,0 +1,10 @@
+
+> consistencygrid@0.1.1 build
+> next build
+
+▲ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local, .env.production, .env
+- Experiments (use with caution):
+  · clientTraceMetadata
+
+  Creating an optimized production build ...

@@ -1,0 +1,7 @@
+node_modules
+.next
+electron-app
+windows-app
+cypress
+.agents
+docs

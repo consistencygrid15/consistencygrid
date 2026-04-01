@@ -1,0 +1,273 @@
+{
+  "version": "1.0",
+  "name": "ConsistencyGrid Production Monitoring",
+  "description": "Comprehensive monitoring alerts for 100k user scale",
+  "alerts": [
+    {
+      "id": "error-rate-spike",
+      "name": "Error Rate Spike",
+      "description": "Alert when error rate exceeds 1% for 5+ minutes",
+      "metric": "event.error_rate",
+      "threshold": 0.01,
+      "duration_minutes": 5,
+      "severity": "critical",
+      "channels": ["slack", "pagerduty", "email"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 0.01
+      }
+    },
+    {
+      "id": "response-time-slow",
+      "name": "Slow Response Times",
+      "description": "Alert when P95 response time exceeds 3 seconds",
+      "metric": "transaction.duration.p95",
+      "threshold": 3000,
+      "duration_minutes": 5,
+      "severity": "warning",
+      "channels": ["slack", "email"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 3000
+      }
+    },
+    {
+      "id": "database-error-rate",
+      "name": "Database Query Failures",
+      "description": "Alert when database errors exceed 0.5% of queries",
+      "metric": "db.query.failure_rate",
+      "threshold": 0.005,
+      "duration_minutes": 3,
+      "severity": "critical",
+      "channels": ["slack", "pagerduty", "email"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 0.005
+      }
+    },
+    {
+      "id": "payment-failure-rate",
+      "name": "Payment Processing Failures",
+      "description": "Alert when payment failures exceed 2% of transactions",
+      "metric": "payment.failure_rate",
+      "threshold": 0.02,
+      "duration_minutes": 10,
+      "severity": "critical",
+      "channels": ["slack", "pagerduty", "email"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 0.02
+      }
+    },
+    {
+      "id": "rate-limit-abuse",
+      "name": "Rate Limit Abuse Detected",
+      "description": "Alert when 429 responses exceed 100 per minute",
+      "metric": "http.status_429_count",
+      "threshold": 100,
+      "duration_minutes": 1,
+      "severity": "warning",
+      "channels": ["slack"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 100
+      }
+    },
+    {
+      "id": "memory-exhaustion",
+      "name": "Memory Usage Critical",
+      "description": "Alert when server memory usage exceeds 85%",
+      "metric": "system.memory.usage_percent",
+      "threshold": 85,
+      "duration_minutes": 2,
+      "severity": "critical",
+      "channels": ["slack", "pagerduty"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 85
+      }
+    },
+    {
+      "id": "cpu-exhaustion",
+      "name": "CPU Usage Critical",
+      "description": "Alert when CPU usage exceeds 80% for 5+ minutes",
+      "metric": "system.cpu.usage_percent",
+      "threshold": 80,
+      "duration_minutes": 5,
+      "severity": "warning",
+      "channels": ["slack"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 80
+      }
+    },
+    {
+      "id": "security-event",
+      "name": "Security Event Detected",
+      "description": "Alert on security-related events",
+      "event_filter": "tags.security:true",
+      "severity": "critical",
+      "channels": ["slack", "pagerduty", "email"],
+      "conditions": {
+        "event_type": ["security", "auth_failure", "suspicious_activity"]
+      }
+    },
+    {
+      "id": "wallpaper-generation-failure",
+      "name": "Wallpaper Generation Failures",
+      "description": "Alert when wallpaper generation fails for >1% of requests",
+      "metric": "wallpaper.generation.failure_rate",
+      "threshold": 0.01,
+      "duration_minutes": 5,
+      "severity": "warning",
+      "channels": ["slack"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 0.01
+      }
+    },
+    {
+      "id": "database-connection-pool-exhaustion",
+      "name": "Database Connection Pool Low",
+      "description": "Alert when available DB connections drop below 5",
+      "metric": "db.pool.available_connections",
+      "threshold": 5,
+      "duration_minutes": 2,
+      "severity": "critical",
+      "channels": ["slack", "pagerduty"],
+      "conditions": {
+        "operator": "less_than",
+        "value": 5
+      }
+    },
+    {
+      "id": "unhandled-exception",
+      "name": "Unhandled Exceptions",
+      "description": "Alert on any unhandled exceptions in production",
+      "event_filter": "error.handled:false",
+      "severity": "critical",
+      "channels": ["slack", "pagerduty", "email"],
+      "conditions": {
+        "event_type": ["error"]
+      }
+    },
+    {
+      "id": "timeout-spike",
+      "name": "Request Timeout Spike",
+      "description": "Alert when timeouts exceed 5 per minute",
+      "metric": "http.timeout_count",
+      "threshold": 5,
+      "duration_minutes": 1,
+      "severity": "warning",
+      "channels": ["slack"],
+      "conditions": {
+        "operator": "greater_than",
+        "value": 5
+      }
+    },
+    {
+      "id": "deployment-failure",
+      "name": "Deployment Failed",
+      "description": "Alert when deployment to production fails",
+      "event_filter": "tags.deployment:true AND level:error",
+      "severity": "critical",
+      "channels": ["slack", "pagerduty", "email"],
+      "conditions": {
+        "event_type": ["deployment_error"]
+      }
+    }
+  ],
+  "escalation_policies": [
+    {
+      "id": "critical-oncall",
+      "name": "Critical Issues On-Call",
+      "severity": "critical",
+      "escalation_delay_minutes": 15,
+      "steps": [
+        {
+          "step": 1,
+          "notify": "primary_oncall",
+          "delay_minutes": 0
+        },
+        {
+          "step": 2,
+          "notify": "secondary_oncall",
+          "delay_minutes": 15
+        },
+        {
+          "step": 3,
+          "notify": "manager",
+          "delay_minutes": 30
+        }
+      ]
+    },
+    {
+      "id": "warning-async",
+      "name": "Warning Issues Async",
+      "severity": "warning",
+      "escalation_delay_minutes": 0,
+      "steps": [
+        {
+          "step": 1,
+          "notify": "slack_channel",
+          "delay_minutes": 0
+        }
+      ]
+    }
+  ],
+  "notification_rules": {
+    "slack": {
+      "webhook_url": "${SLACK_WEBHOOK_URL}",
+      "channel": "#production-alerts",
+      "format": "detailed",
+      "include_context": true,
+      "include_logs": true
+    },
+    "email": {
+      "recipients": ["ops@consistencygrid.com"],
+      "subject_template": "[{severity}] {alert_name}",
+      "format": "html",
+      "include_graphs": true
+    },
+    "pagerduty": {
+      "integration_key": "${PAGERDUTY_KEY}",
+      "urgency": "high",
+      "auto_resolve": true,
+      "auto_resolve_after_minutes": 15
+    }
+  },
+  "dashboard_metrics": {
+    "key_metrics": [
+      "transaction.count",
+      "event.error_rate",
+      "transaction.duration.p95",
+      "db.query.count",
+      "http.status_429_count",
+      "payment.transaction.count",
+      "wallpaper.generation.count",
+      "system.memory.usage_percent",
+      "system.cpu.usage_percent"
+    ],
+    "refresh_interval": "60s"
+  },
+  "health_check": {
+    "endpoint": "/api/health",
+    "interval_seconds": 60,
+    "timeout_seconds": 10,
+    "expected_response": {
+      "status": "ok",
+      "database": "connected",
+      "cache": "working"
+    }
+  },
+  "sentry_projects": {
+    "frontend": {
+      "slug": "consistencygrid-frontend",
+      "dsn_env_var": "NEXT_PUBLIC_SENTRY_DSN"
+    },
+    "backend": {
+      "slug": "consistencygrid-backend",
+      "dsn_env_var": "SENTRY_DSN"
+    }
+  }
+}

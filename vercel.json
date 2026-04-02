@@ -18,7 +18,7 @@
   "crons": [
     {
       "path": "/api/cron/midnight-push",
-     "schedule": "0 0 * * *"
+     "schedule": "*/15 * * * *"
     }
   ]
 }

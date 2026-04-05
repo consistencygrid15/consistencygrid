@@ -62,6 +62,29 @@ async function pruneStaleTokens(tokens, responses) {
 }
 
 // ─────────────────────────────────────────────
+// SEND TOPIC PUSH (Broadcast to thousands at once)
+// Solves scalable thundering herd since max timeout is avoided
+// ─────────────────────────────────────────────
+export async function sendTopicWallpaperUpdatePush(topic, jitterMaxMinutes = 60) {
+  try {
+    const response = await admin.messaging().send({
+      data: {
+        type: 'WALLPAPER_UPDATE_TRIGGER',
+        timestamp: Date.now().toString(),
+        jitter_max_minutes: jitterMaxMinutes.toString(),
+      },
+      topic: topic,
+      android: { priority: 'high' },
+    });
+    console.log(`[FCM] Topic (${topic}) push success: ${response}`);
+    return true;
+  } catch (error) {
+    console.error(`[FCM] Topic (${topic}) push error:`, error.message);
+    return false;
+  }
+}
+
+// ─────────────────────────────────────────────
 // SEND SINGLE PUSH (for a single token)
 // ─────────────────────────────────────────────
 export async function sendWallpaperUpdatePush(token) {

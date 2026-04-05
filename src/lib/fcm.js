@@ -137,6 +137,7 @@ export async function sendMulticastWallpaperUpdatePush(tokens) {
           data: {
             type: 'WALLPAPER_UPDATE_TRIGGER',
             timestamp: Date.now().toString(),
+            jitter_max_minutes: "0", // Instant update for manual habit toggles!
           },
           tokens: batchTokens,
           android: { priority: 'high' },

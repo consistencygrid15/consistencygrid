@@ -52,10 +52,10 @@ export async function GET(req) {
             10
           );
 
-          // Midnight Window: 23:30 to 00:30
-          const isLateNight = localHour === 23 && localMinute >= 30;
-          const isEarlyMorning = localHour === 0 && localMinute <= 30;
-          return isLateNight || isEarlyMorning;
+          // Midnight Window: exactly one hit between 00:00 and 00:15
+          // Cron runs every 15 mins (e.g., :00, :15, :30, :45).
+          // We only want the first slot right after midnight!
+          return localHour === 0 && localMinute < 15;
         } catch {
           return false;
         }

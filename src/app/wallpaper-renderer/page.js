@@ -19,10 +19,14 @@ export default function WallpaperRenderer() {
     useEffect(() => {
         // Expose render function for Android automation
         window.forceWallpaperRender = async () => {
-            console.log('🤖 Android forced render');
+            console.log('🤖 Android forced render triggered');
             const params = new URLSearchParams(window.location.search);
             const token = params.get('token');
-            if (token) await fetchDataAndRender(token);
+            if (token) {
+                await fetchDataAndRender(token);
+            } else {
+                console.error('❌ forceWallpaperRender: no token in URL');
+            }
         };
 
         // Expose refresh function for manual triggers (e.g., after adding/editing reminder)
@@ -40,10 +44,19 @@ export default function WallpaperRenderer() {
         if (!token) {
             setStatus('error');
             setErrorMsg('Missing token parameter');
+            // Signal Android even on error so it doesn't hang waiting
+            if (window.Android && window.Android.onPageReady) {
+                window.Android.onPageReady();
+            }
             return;
         }
 
-        fetchDataAndRender(token);
+        // For web browser users: auto-render immediately on load.
+        // For Android headless WebView: do NOT auto-render here.
+        // The WallpaperWorker calls forceWallpaperRender() after receiving onPageReady().
+        if (!window.Android) {
+            fetchDataAndRender(token);
+        }
 
         // 🎯 Fallback: JS-side midnight re-render for users who have the page open.
         // NOTE: The primary update path is the Android WallpaperWorker (alarm-based).
@@ -72,7 +85,19 @@ export default function WallpaperRenderer() {
             }, msToWait);
         };
 
-        scheduleNextMidnightUpdate();
+        if (!window.Android) {
+            scheduleNextMidnightUpdate();
+        }
+
+        // 📱 CRITICAL: Signal Android that React has fully hydrated and the JS bridge is ready.
+        // The WallpaperWorker waits for this signal before calling forceWallpaperRender().
+        // Without this signal, the worker may inject JS too early (before window.forceWallpaperRender
+        // is defined), causing a silent no-op and a 90-120s timeout.
+        if (window.Android && window.Android.onPageReady) {
+            console.log('📱 Signalling Android: React hydrated, JS bridge ready (onPageReady)');
+            window.Android.onPageReady();
+        }
+
         return () => clearTimeout(timerId);
     }, []);
 
@@ -227,9 +252,14 @@ export default function WallpaperRenderer() {
             }
 
         } catch (err) {
-            console.error('Render failed:', err);
+            console.error('❌ Render failed:', err.message, err.stack);
             setStatus('error');
             setErrorMsg(err.message);
+            // Signal Android of failure immediately so the worker doesn't wait for the full timeout
+            if (window.Android && window.Android.saveWallpaper) {
+                console.error('📱 Signalling Android of render failure');
+                window.Android.saveWallpaper(''); // Empty string triggers the blank-check in saveWallpaper()
+            }
         }
     }
 

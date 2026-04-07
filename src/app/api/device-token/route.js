@@ -5,6 +5,33 @@ import prisma from '@/lib/prisma';
 // IANA timezone list — used to validate timezone strings before saving to DB
 const VALID_TIMEZONES = new Set(Intl.supportedValuesOf('timeZone'));
 
+export async function GET(req) {
+  try {
+    const session = await getUniversalSession();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const tokens = await prisma.deviceToken.findMany({
+      where: { userId: session.user.id, deviceType: 'android' },
+      select: { token: true, timezone: true, updatedAt: true },
+    });
+
+    return NextResponse.json({
+      registered: tokens.length > 0,
+      count: tokens.length,
+      tokens: tokens.map(t => ({
+        // Mask the token for security — show first 20 chars only
+        token: t.token.substring(0, 20) + '...',
+        timezone: t.timezone,
+        lastSeen: t.updatedAt,
+      })),
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
 export async function POST(req) {
   try {
     // ✅ CRITICAL FIX: Use getUniversalSession instead of getServerSession.

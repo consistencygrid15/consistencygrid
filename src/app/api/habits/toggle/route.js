@@ -63,8 +63,9 @@ export async function POST(req) {
 
       await invalidateHabitsCache(user.id);
 
-      // 🔥 Trigger real-time wallpaper update — fire-and-forget (does not block response)
-      sendInstantHabitPush(user.id).catch((e) =>
+      // 🔥 Trigger real-time wallpaper update
+      // Must await on Vercel otherwise serverless execution context dies before push is sent
+      await sendInstantHabitPush(user.id).catch((e) =>
         console.error('[Toggle] FCM push error:', e.message)
       );
 
@@ -83,8 +84,9 @@ export async function POST(req) {
 
     await invalidateHabitsCache(user.id);
 
-    // 🔥 Trigger real-time wallpaper update — fire-and-forget (does not block response)
-    sendInstantHabitPush(user.id).catch((e) =>
+    // 🔥 Trigger real-time wallpaper update
+    // Must await on Vercel otherwise serverless execution context dies before push is sent
+    await sendInstantHabitPush(user.id).catch((e) =>
       console.error('[Toggle] FCM push error:', e.message)
     );
 

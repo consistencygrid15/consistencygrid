@@ -37,6 +37,20 @@ export default function WallpaperRenderer() {
             if (token) await fetchDataAndRender(token);
         };
 
+        // EXPOSE OFFLINE BRIDGE FOR ANDROID APP
+        // This allows the Android app to inject settings directly, side-stepping the network API fully!
+        window.renderOfflineData = async (jsonString) => {
+            console.log('⚡ Received OFFLINE data payload from Android -> rendering directly!');
+            try {
+                const data = JSON.parse(jsonString);
+                await performRender(data);
+            } catch (err) {
+                console.error('❌ Failed to render offline data:', err);
+                setStatus('error');
+                setErrorMsg('Invalid offline data');
+            }
+        };
+
         // Automatic render on load
         const params = new URLSearchParams(window.location.search);
         const token = params.get('token');
@@ -131,15 +145,29 @@ export default function WallpaperRenderer() {
             if (!res.ok) throw new Error(`API Error: ${res.status}`);
 
             const data = await res.json();
-            console.log('✅ Data received:', data);
+            console.log('✅ Data received from network:', data);
 
+            await performRender(data);
+
+        } catch (err) {
+            console.error('❌ Network Render failed:', err.message, err.stack);
+            setStatus('error');
+            setErrorMsg(err.message);
+            if (window.Android && window.Android.saveWallpaper) {
+                window.Android.saveWallpaper('');
+            }
+        }
+    }
+
+    async function performRender(data) {
+        try {
             const canvas = canvasRef.current;
             if (!canvas) return;
 
             // Set initial canvas size from data (will be strictly enforced below)
-            const { settings = {} } = data.user;
-            canvas.width = settings.canvasWidth || 1080;
-            canvas.height = settings.canvasHeight || 2340;
+            const { settings = {} } = data.user || {};
+            canvas.width = settings.canvasWidth || settings.width || 1080;
+            canvas.height = settings.canvasHeight || settings.height || 2340;
 
             const ctx = canvas.getContext('2d');
 
@@ -155,8 +183,8 @@ export default function WallpaperRenderer() {
 
             // Draw Everything
             const theme = getThemeColors(settings.theme || 'dark-minimal');
-            const cWidth = settings.canvasWidth || 1080;
-            const cHeight = settings.canvasHeight || 2340;
+            const cWidth = settings.canvasWidth || settings.width || 1080;
+            const cHeight = settings.canvasHeight || settings.height || 2340;
 
             // Re-sync canvas size if needed
             canvas.width = cWidth;

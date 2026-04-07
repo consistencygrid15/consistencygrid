@@ -10,8 +10,10 @@ if (!admin.apps.length) {
   try {
     const projectId = process.env.FIREBASE_PROJECT_ID;
     const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-    // Vercel env vars store \n as literal "\\n" — replace back to actual newlines
-    const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+    // Vercel env vars store \n as literal "\\n", and sometimes include literal quotes around the whole string
+    const privateKey = process.env.FIREBASE_PRIVATE_KEY
+      ?.replace(/^"|"$/g, '') // Remove literal surrounding quotes
+      ?.replace(/\\n/g, '\n'); // Convert literal \n to actual newlines
 
     if (!projectId || !clientEmail || !privateKey) {
       throw new Error(

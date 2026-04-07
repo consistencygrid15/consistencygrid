@@ -53,7 +53,21 @@ export async function POST(req) {
     }
 
     // Validate timezone is a real IANA timezone string
-    const resolvedTimezone = timezone || 'UTC';
+    let resolvedTimezone = timezone || 'UTC';
+    
+    // Android sometimes sends legacy timezone IDs not present in Intl.supportedValuesOf
+    const legacyTimezoneMap = {
+      'Asia/Calcutta': 'Asia/Kolkata',
+      'Asia/Saigon': 'Asia/Ho_Chi_Minh',
+      'Asia/Katmandu': 'Asia/Kathmandu',
+      'Asia/Rangoon': 'Asia/Yangon',
+      'IST': 'Asia/Kolkata', // Sometimes Android returns shorthand
+    };
+    
+    if (legacyTimezoneMap[resolvedTimezone]) {
+      resolvedTimezone = legacyTimezoneMap[resolvedTimezone];
+    }
+
     const validatedTimezone = VALID_TIMEZONES.has(resolvedTimezone) ? resolvedTimezone : 'UTC';
 
     if (!VALID_TIMEZONES.has(resolvedTimezone)) {

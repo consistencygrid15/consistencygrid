@@ -1,0 +1,57 @@
+
+Invalid `(token)=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique()` invocation in
+D:\startup\consistencygrid\.next\dev\server\chunks\[root-of-the-server]__2beefd7d._.js:87:182
+
+  84     return Math.floor(millisecondsDiff / (1000 * 60 * 60 * 24 * 7));
+  85 }
+  86 // ΓöÇΓöÇΓöÇ Cached data fetchers (per-token, 60s TTL) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+ΓåÆ 87 const getCachedWallpaperUser = async (token)=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+
+PrismaClientInitializationError: 
+Invalid `(token)=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique()` invocation in
+D:\startup\consistencygrid\.next\dev\server\chunks\[root-of-the-server]__2beefd7d._.js:87:182
+
+  84     return Math.floor(millisecondsDiff / (1000 * 60 * 60 * 24 * 7));
+  85 }
+  86 // ΓöÇΓöÇΓöÇ Cached data fetchers (per-token, 60s TTL) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+ΓåÆ 87 const getCachedWallpaperUser = async (token)=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (D:\startup\consistencygrid\node_modules\@prisma\client\runtime\library.js:121:7568)
+    at ei.handleAndLogRequestError (D:\startup\consistencygrid\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (D:\startup\consistencygrid\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (D:\startup\consistencygrid\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async GET (D:\startup\consistencygrid\.next\dev\server\chunks\[root-of-the-server]__2beefd7d._.js:215:29)
+    at async AppRouteRouteModule.do (D:\startup\consistencygrid\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37866)
+    at async AppRouteRouteModule.handle (D:\startup\consistencygrid\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45156)
+    at async responseGenerator (D:\startup\consistencygrid\.next\dev\server\chunks\[root-of-the-server]__cf6aa2cd._.js:20219:38)
+    at async AppRouteRouteModule.handleResponse (D:\startup\consistencygrid\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187713)
+    at async handleResponse (D:\startup\consistencygrid\.next\dev\server\chunks\[root-of-the-server]__cf6aa2cd._.js:20282:32)
+    at async Module.handler (D:\startup\consistencygrid\.next\dev\server\chunks\[root-of-the-server]__cf6aa2cd._.js:20335:13)
+    at async DevServer.renderToResponseWithComponentsImpl (D:\startup\consistencygrid\node_modules\next\dist\server\base-server.js:1422:9)
+    at async DevServer.renderPageComponent (D:\startup\consistencygrid\node_modules\next\dist\server\base-server.js:1474:24)
+    at async DevServer.renderToResponseImpl (D:\startup\consistencygrid\node_modules\next\dist\server\base-server.js:1524:32)
+    at async DevServer.pipeImpl (D:\startup\consistencygrid\node_modules\next\dist\server\base-server.js:1018:25)
+    at async NextNodeServer.handleCatchallRenderRequest (D:\startup\consistencygrid\node_modules\next\dist\server\next-server.js:395:17)
+    at async DevServer.handleRequestImpl (D:\startup\consistencygrid\node_modules\next\dist\server\base-server.js:909:17)
+    at async D:\startup\consistencygrid\node_modules\next\dist\server\dev\next-dev-server.js:387:20
+    at async Span.traceAsyncFn (D:\startup\consistencygrid\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (D:\startup\consistencygrid\node_modules\next\dist\server\dev\next-dev-server.js:383:24)
+    at async invokeRender (D:\startup\consistencygrid\node_modules\next\dist\server\lib\router-server.js:248:21)
+    at async handleRequest (D:\startup\consistencygrid\node_modules\next\dist\server\lib\router-server.js:447:24)
+    at async requestHandlerImpl (D:\startup\consistencygrid\node_modules\next\dist\server\lib\router-server.js:496:13)
+    at async Server.requestListener (D:\startup\consistencygrid\node_modules\next\dist\server\lib\start-server.js:226:13)

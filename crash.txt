@@ -1,0 +1,95 @@
+﻿04-07 14:24:31.479 I/ActivityManager( 1499): Start proc 811:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i174 for  {com.consistencygridwallpaper/org.chromium.content.app.SandboxedProcessService0:0} caller=com.consistencygridwallpaper
+04-07 14:26:31.448 I/ActivityManager( 1499): Killing 811:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a456i174 (adj 0): isolated not needed
+04-07 14:28:52.298 I/ActivityManager( 1499): Start proc 5744:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i175 for  {com.consistencygridwallpaper/org.chromium.content.app.SandboxedProcessService0:0} caller=com.consistencygridwallpaper
+04-07 14:28:58.131 D/SchedBoost( 1499): com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 boosting, skip reset priority
+04-07 14:29:07.206 I/ProcessSceneCleaner( 1499): SwipeUpClean: kill procName=com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 info=AS:90519
+04-07 14:29:07.206 I/ActivityManager( 1499): Killing 5744:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a456i175 (adj 905): SwipeUpClean
+04-07 14:30:34.644 I/ActivityManager( 1499): Start proc 6681:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i176 for  {com.consistencygridwallpaper/org.chromium.content.app.SandboxedProcessService0:0} caller=com.consistencygridwallpaper
+04-07 14:30:42.616 D/SchedBoost( 1499): com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 boosting, skip reset priority
+04-07 14:30:49.970 D/SchedBoost( 1499): com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 boosting, skip reset priority
+04-07 14:32:54.860 D/SchedBoost( 1499): com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 boosting, skip reset priority
+04-07 14:32:57.874 D/SchedBoost( 1499): com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 boosting, skip reset priority
+04-07 14:32:58.697 I/ProcessSceneCleaner( 1499): SwipeUpClean: kill procName=com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 info=AS:90519
+04-07 14:32:58.697 I/ActivityManager( 1499): Killing 6681:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a456i176 (adj 905): SwipeUpClean
+04-07 14:34:20.864 I/ActivityManager( 1499): Start proc 11334:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i177 for  {com.consistencygridwallpaper/org.chromium.content.app.SandboxedProcessService0:0} caller=com.consistencygridwallpaper
+04-07 14:34:25.862 D/SchedBoost( 1499): com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 boosting, skip reset priority
+04-07 14:37:16.121 I/ActivityManager( 1499): Process com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 (pid 11334) has died: cch+10 CACC
+04-07 14:37:24.455 I/ActivityManager( 1499): Start proc 16745:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i178 for  {com.consistencygridwallpaper/org.chromium.content.app.SandboxedProcessService0:0} caller=com.consistencygridwallpaper
+04-07 14:39:25.340 I/ActivityManager( 1499): Killing 16745:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a456i178 (adj 0): isolated not needed
+04-07 14:40:52.858 I/ActivityManager( 1499): Start proc 19206:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i179 for  {com.consistencygridwallpaper/org.chromium.content.app.SandboxedProcessService0:0} caller=com.consistencygridwallpaper
+04-07 14:40:55.884 D/SchedBoost( 1499): com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 boosting, skip reset priority
+04-07 14:43:19.580 E/AndroidRuntime(19150): FATAL EXCEPTION: WM.task-4
+04-07 14:43:19.580 E/AndroidRuntime(19150): Process: com.consistencygridwallpaper, PID: 19150
+04-07 14:43:19.580 E/AndroidRuntime(19150): kotlinx.coroutines.CompletionHandlerException: Exception in invokeOnCancellation handler for CancellableContinuation(DispatchedContinuation[Dispatchers.Main, Continuation at com.consistencygridwallpaper.workers.WallpaperWorker$doWork$2$success$1.invokeSuspend(WallpaperWorker.kt:167)@cab9008]){Cancelled}@91ef3a1
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.CancellableContinuationImpl.callCancelHandler(CancellableContinuationImpl.kt:683)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.CancellableContinuationImpl.cancel(CancellableContinuationImpl.kt:212)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.CancellableContinuationImpl.parentCancelled$kotlinx_coroutines_core(CancellableContinuationImpl.kt:224)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.ChildContinuation.invoke(JobSupport.kt:1447)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.notifyCancelling(JobSupport.kt:1474)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.tryMakeCancelling(JobSupport.kt:798)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.makeCancelling(JobSupport.kt:758)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.cancelImpl$kotlinx_coroutines_core(JobSupport.kt:674)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.parentCancelled(JobSupport.kt:640)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.ChildHandleNode.invoke(JobSupport.kt:1438)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.notifyCancelling(JobSupport.kt:1474)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.tryMakeCancelling(JobSupport.kt:798)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.makeCancelling(JobSupport.kt:758)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.cancelImpl$kotlinx_coroutines_core(JobSupport.kt:674)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.parentCancelled(JobSupport.kt:640)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.ChildHandleNode.invoke(JobSupport.kt:1438)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.notifyCancelling(JobSupport.kt:1474)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.tryMakeCancelling(JobSupport.kt:798)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.makeCancelling(JobSupport.kt:758)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.cancelImpl$kotlinx_coroutines_core(JobSupport.kt:674)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.parentCancelled(JobSupport.kt:640)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.ChildHandleNode.invoke(JobSupport.kt:1438)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.notifyCancelling(JobSupport.kt:1474)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.tryMakeCompletingSlowPath(JobSupport.kt:903)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.tryMakeCompleting(JobSupport.kt:866)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.cancelMakeCompleting(JobSupport.kt:699)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.cancelImpl$kotlinx_coroutines_core(JobSupport.kt:670)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.cancelInternal(JobSupport.kt:635)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.JobSupport.cancel(JobSupport.kt:620)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at kotlinx.coroutines.Job$DefaultImpls.cancel$default(Job.kt:199)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at androidx.work.CoroutineWorker._init_$lambda$0(CoroutineWorker.kt:50)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at androidx.work.CoroutineWorker.$r8$lambda$AJqza2-JrGJsksuufkexElghlM0(Unknown Source:0)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at androidx.work.CoroutineWorker$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at androidx.work.impl.utils.SerialExecutorImpl$Task.run(SerialExecutorImpl.java:96)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at java.lang.Thread.run(Thread.java:1564)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [TimeoutCoroutine(timeMillis=120000){Cancelling}@761cb23, Dispatchers.Main]
+04-07 14:43:19.580 E/AndroidRuntime(19150): Caused by: java.lang.RuntimeException: java.lang.Throwable: A WebView method was called on thread 'WM.task-4'. All WebView methods must be called on the same thread. (Expected Looper Looper (main, tid 2) {1fca010} called on null, FYI main Looper is Looper (main, tid 2) {1fca010})
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at android.webkit.WebView.checkThread(WebView.java:2615)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at android.webkit.WebView.stopLoading(WebView.java:928)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at com.consistencygridwallpaper.workers.WallpaperWorker$updateWallpaper$2$5.invoke(WallpaperWorker.kt:487)
+04-07 14:43:19.580 E/AndroidRuntime(19150): 	at com.consistencygridwallpaper.workers.WallpaperWorker$updateWallpaper$2$5.invoke(WallpaperWorker.kt:485)
+04-07 14:43:19.583 E/AndroidRuntime(19150): 	at kotlinx.coroutines.InvokeOnCancel.invoke(CancellableContinuationImpl.kt:642)
+04-07 14:43:19.583 E/AndroidRuntime(19150): 	at kotlinx.coroutines.CancellableContinuationImpl.callCancelHandler(CancellableContinuationImpl.kt:249)
+04-07 14:43:19.583 E/AndroidRuntime(19150): 	... 36 more
+04-07 14:43:19.583 E/AndroidRuntime(19150): Caused by: java.lang.Throwable: A WebView method was called on thread 'WM.task-4'. All WebView methods must be called on the same thread. (Expected Looper Looper (main, tid 2) {1fca010} called on null, FYI main Looper is Looper (main, tid 2) {1fca010})
+04-07 14:43:19.583 E/AndroidRuntime(19150): 	at android.webkit.WebView.checkThread(WebView.java:2610)
+04-07 14:43:19.583 E/AndroidRuntime(19150): 	... 41 more
+04-07 14:43:19.941 I/ActivityManager( 1499): Killing 19206:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a456i179 (adj 0): isolated not needed
+04-07 14:44:55.011 I/ActivityManager( 1499): Start proc 21080:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i180 for  {com.consistencygridwallpaper/org.chromium.content.app.SandboxedProcessService0:0} caller=com.consistencygridwallpaper
+04-07 14:45:10.334 I/ActivityManager( 1499): Process com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 (pid 21080) has died: cch CACC
+04-07 14:45:41.558 I/ActivityManager( 1499): Start proc 21751:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0ai0 for  {com.android.chrome/org.chromium.content.app.SandboxedProcessService0:0} caller=com.android.chrome
+04-07 14:45:41.799 I/ActivityManager( 1499): Start proc 21794:com.android.chrome:privileged_process0/u0a190 for service {com.android.chrome/org.chromium.content.app.PrivilegedProcessService0} caller=com.android.chrome
+04-07 14:45:42.612 D/PackageManager( 1499): set app component=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.quickactionsearchwidget.QuickActionSearchWidgetProvider$QuickActionSearchWidgetProviderSearch} enabled state: 1 from null,uid=10190,pid=21679
+04-07 14:45:42.615 D/PackageManager( 1499): set app component=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.quickactionsearchwidget.QuickActionSearchWidgetProvider$QuickActionSearchWidgetProviderDino} enabled state: 1 from null,uid=10190,pid=21679
+04-07 14:45:42.992 I/ActivityManager( 1499): Start proc 22035:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:1/u0ai1 for  {com.android.chrome/org.chromium.content.app.SandboxedProcessService0:1} caller=com.android.chrome
+04-07 14:45:44.011 I/ActivityManager( 1499): Process com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:1 (pid 22035) has died: cch CACC
+04-07 14:45:44.531 I/ActivityManager( 1499): Start proc 22209:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2/u0ai2 for  {com.android.chrome/org.chromium.content.app.SandboxedProcessService0:2} caller=com.android.chrome
+04-07 14:45:45.215 I/ActivityManager( 1499): Start proc 22272:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:3/u0ai3 for  {com.android.chrome/org.chromium.content.app.SandboxedProcessService0:3} caller=com.android.chrome
+04-07 14:45:45.342 I/ActivityManager( 1499): Killing 22272:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:3/u0a190i-8997 (adj 0): isolated not needed
+04-07 14:45:52.070 E/ProcessStats( 1499): Executing service ServiceState{712d9cb org.chromium.content.app.SandboxedProcessService0 pkg=com.android.chrome proc=1f35e75} without owner
+04-07 14:45:52.079 E/ProcessStats( 1499): Binding service ServiceState{712d9cb org.chromium.content.app.SandboxedProcessService0 pkg=com.android.chrome proc=1f35e75} without owner
+04-07 14:45:52.079 E/ProcessStats( 1499): Starting service ServiceState{712d9cb org.chromium.content.app.SandboxedProcessService0 pkg=com.android.chrome proc=1f35e75} without owner
+04-07 14:45:52.080 E/ProcessStats( 1499): Binding service ServiceState{712d9cb org.chromium.content.app.SandboxedProcessService0 pkg=com.android.chrome proc=1f35e75} without owner
+04-07 14:45:52.085 I/ActivityManager( 1499): Killing 22209:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2/u0a190i-8998 (adj 0): isolated not needed
+04-07 14:45:52.927 I/ActivityManager( 1499): Start proc 22454:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4/u0ai4 for  {com.android.chrome/org.chromium.content.app.SandboxedProcessService0:4} caller=com.android.chrome
+04-07 14:46:04.396 I/ActivityManager( 1499): Killing 22454:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4/u0a190i-8996 (adj 0): isolated not needed
+04-07 14:46:05.574 I/ActivityManager( 1499): Start proc 22688:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5/u0ai5 for  {com.android.chrome/org.chromium.content.app.SandboxedProcessService0:5} caller=com.android.chrome
+04-07 14:46:08.321 D/SchedBoost( 1499): com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 boosting, skip reset priority
+04-07 14:46:12.649 I/SmartPower.com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5/90005background->idle(7093ms) R(service end com.android.chrome/org.chromium.content.app.SandboxedProcessService0:5) adj=700.
+04-07 14:46:12.649 I/SmartPower.com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/90000background->idle(31257ms) R(adj below visible) adj=700.

@@ -12,10 +12,10 @@ export function drawDashboardHeader(
     { xCoordinate, yCoordinate, width, theme, history, todayPercent, hasCustomBg }
 ) {
     const contentWidth = width;
-    const statsHeight = 280;
+    const statsHeight = 220; // Original was 280, optimized dead space
 
     if (hasCustomBg) {
-        drawFrostedCard(context, xCoordinate - 10, yCoordinate - 30, contentWidth + 20, statsHeight, { radius: 36, padding: 15 });
+        drawFrostedCard(context, xCoordinate - 10, yCoordinate - 20, contentWidth + 20, statsHeight, { radius: 36, padding: 15 });
     }
 
     /* ---------------- LEFT COLUMN ---------------- */
@@ -25,16 +25,16 @@ export function drawDashboardHeader(
         color: theme.TEXT_SUB,
     });
 
-    drawSafeText(context, "GROWTH", xCoordinate, yCoordinate + 50, {
+    drawSafeText(context, "GROWTH", xCoordinate, yCoordinate + 44, {
         font: "bold 40px Inter, sans-serif",
         color: theme.TEXT_MAIN,
     });
 
     // Chart area
     const chartX = xCoordinate;
-    const chartY = yCoordinate + 80;
+    const chartY = yCoordinate + 70;
     const chartWidth = contentWidth * 0.5;
-    const chartHeight = 120;
+    const chartHeight = 110; // Original 120
 
     const dataPoints =
         history && history.length > 0 ? history : [2, 4, 3, 5, 4, 6, 5];
@@ -94,14 +94,14 @@ export function drawDashboardHeader(
     /* ---------------- RIGHT COLUMN ---------------- */
 
     const ringX = xCoordinate + contentWidth - 90;
-    const ringY = yCoordinate + 100;
-    const radius = 90;
+    const ringY = yCoordinate + 90;
+    const radius = 80;
 
     // Track
     context.beginPath();
     context.arc(ringX, ringY, radius, 0, 2 * Math.PI);
     context.strokeStyle = "#27272a";
-    context.lineWidth = 16;
+    context.lineWidth = 14;
     context.stroke();
 
     // Progress
@@ -118,20 +118,20 @@ export function drawDashboardHeader(
             -Math.PI / 2 + (percent / 100) * 2 * Math.PI
         );
         context.strokeStyle = theme.ACCENT;
-        context.lineWidth = 16;
+        context.lineWidth = 14;
         context.lineCap = "round";
         context.stroke();
         context.shadowBlur = 0;
     }
 
-    drawSafeText(context, `${percent}%`, ringX, ringY + 18, {
-        font: "bold 52px Inter, sans-serif",
+    drawSafeText(context, `${percent}%`, ringX, ringY + 16, {
+        font: "bold 48px Inter, sans-serif",
         color: theme.TEXT_MAIN,
         align: "center",
     });
 
-    drawSafeText(context, "DAILY GOAL", ringX, ringY + 135, {
-        font: "bold 16px Inter, sans-serif",
+    drawSafeText(context, "DAILY GOAL", ringX, ringY + 120, {
+        font: "bold 15px Inter, sans-serif",
         color: theme.TEXT_SUB,
         align: "center",
         shadow: false,
@@ -205,13 +205,13 @@ export function drawStreakWidget(
     const statusText = streakActiveToday ? "SYSTEM ACTIVE" : "SIGNAL LOST";
 
     // ===== Typography =====
-    const streakFont = "bold 80px Inter, sans-serif";
+    const streakFont = "bold 72px Inter, sans-serif";
     const statusFont = "bold 14px Inter, sans-serif";
 
     // ===== Layout constants =====
-    const iconSize = 70;
+    const iconSize = 64;
     const gap = 12;
-    const statusOffsetY = 52;
+    const statusOffsetY = 48;
 
     // ===== Measure streak text =====
     context.font = streakFont;
@@ -232,11 +232,11 @@ export function drawStreakWidget(
     if (hasCustomBg) {
         drawFrostedCard(
             context,
-            startX - 20,
-            centerY - iconSize / 2 - 20,
-            widgetWidth + 40,
-            iconSize + statusOffsetY + 20,
-            { radius: 36, padding: 10 }
+            startX - 15,
+            centerY - iconSize / 2 - 15,
+            widgetWidth + 30,
+            iconSize + statusOffsetY + 10,
+            { radius: 24, padding: 8 }
         );
     }
 

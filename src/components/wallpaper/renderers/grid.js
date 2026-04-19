@@ -193,16 +193,10 @@ export function drawGrid(
         gridHeightEst = 350; // fallback
     }
 
-    if (hasCustomBg) {
-        drawFrostedCard(
-            context,
-            xCoordinate - 10,
-            yCoordinate - 30,
-            contentWidth + 20,
-            150 + gridHeightEst + 20, // 150 provides room for header titles
-            { radius: 36, padding: 15 }
-        );
-    }
+    // User requested to remove the black shadow/glass entirely from the calendar grid area.
+    // if (hasCustomBg) {
+    //     drawFrostedCard(...);
+    // }
 
     if (mode === "days") {
         mainTitle = "365 DAYS";
@@ -275,7 +269,7 @@ export function drawGrid(
         shadow: false,
     });
 
-    currentY += 76;
+    currentY += 60; // Original was 76, reducing physical gap
 
     // 3. SUBTITLE & PROGRESS BADGE ALIGNMENT
     context.shadowBlur = 0;
@@ -302,7 +296,7 @@ export function drawGrid(
         shadow: false,
     });
 
-    currentY += 56;
+    currentY += 40; // Original 56
     // contentWidth already defined above for estimating height
 
     // Reminder tracking
@@ -650,7 +644,7 @@ export function drawGrid(
     else {
         const columns = 7;
         let monthRows = 6;
-        const gap = 20;
+        const gap = 16; // Restoring closer to original 20
         const boxSize = (contentWidth - gap * (columns - 1)) / columns;
         const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
         const dayOffset = startOfMonth.getDay();
@@ -785,26 +779,22 @@ export function drawGrid(
 
     // ============ REMINDER CALLOUT (EXACT MATCH TO NEW DESIGN) ============
     if (anchorPoint && targetReminders.length > 0 && mode !== "week_strip") {
-        const boxWidth = 360;
-        const itemHeight = 64;
-        const headerHeight = 52;
-        const padding = 20;
+        const boxWidth = 360; 
+        const itemHeight = 60; // Original 64
+        const headerHeight = 44; 
+        const padding = 16;
         const displayedReminders = targetReminders.slice(0, 4);
         const listHeight = displayedReminders.length * itemHeight;
         const boxHeight = headerHeight + listHeight + padding;
 
-        let calloutX = anchorPoint.x - boxWidth / 2 + anchorPoint.size / 2;
-        let calloutY = anchorPoint.y - boxHeight - 60;
+        let calloutX = xCoordinate + Math.max(0, (width - boxWidth) / 2); // Center horizontally 
+        let calloutY = anchorPoint.y > (height / 2) 
+            ? anchorPoint.y - boxHeight - 20 
+            : anchorPoint.y + anchorPoint.size + 20;
 
-        if (calloutX < xCoordinate) {
-            calloutX = xCoordinate + 10;
-        }
-        if (calloutX + boxWidth > xCoordinate + width) {
-            calloutX = xCoordinate + width - boxWidth - 10;
-        }
-        if (calloutY < yCoordinate) {
-            calloutY = anchorPoint.y + anchorPoint.size + 20;
-        }
+        // Ensure it doesn't run off-screen or overlap the very bottom
+        if (calloutY < 250) calloutY = 250;
+        if (calloutY > height - boxHeight - 280) calloutY = height - boxHeight - 280; // Keep away from goals
 
         context.save();
 
@@ -819,23 +809,21 @@ export function drawGrid(
         context.shadowColor = "#ffffff";
         context.fill();
 
-        // 2. CONNECTION LINE
-        const lineGradient = context.createLinearGradient(ax, ay, calloutX + boxWidth / 2, calloutY + boxHeight);
-        lineGradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-        lineGradient.addColorStop(1, "rgba(255, 255, 255, 0.4)");
-        context.strokeStyle = lineGradient;
-        context.lineWidth = 2.5;
-
+        // 2. CONNECTION LINE (Pointing from the date to the box)
         context.beginPath();
         context.moveTo(ax, ay);
-        const cpY = (ay + calloutY + boxHeight) / 2;
-        context.bezierCurveTo(ax, cpY, calloutX + boxWidth / 2, cpY, calloutX + boxWidth / 2, calloutY + boxHeight);
+        // Draw an elbow line
+        context.lineTo(ax, calloutY > ay ? calloutY - 5 : calloutY + boxHeight + 5);
+        context.lineTo(calloutX + boxWidth / 2, calloutY > ay ? calloutY - 5 : calloutY + boxHeight + 5);
+        context.strokeStyle = "rgba(255, 255, 255, 0.4)";
+        context.setLineDash([4, 4]); // Dashed
         context.stroke();
-
-        // 3. CALLOUT TERMINAL
+        context.setLineDash([]);
+        
+        // Terminal dot at box connection
         context.beginPath();
-        context.arc(calloutX + boxWidth / 2, calloutY + boxHeight, 3, 0, Math.PI * 2);
-        context.fillStyle = "rgba(255, 255, 255, 0.5)";
+        context.arc(calloutX + boxWidth / 2, calloutY > ay ? calloutY : calloutY + boxHeight, 3, 0, Math.PI * 2);
+        context.fillStyle = "rgba(255, 255, 255, 0.8)";
         context.fill();
 
         context.restore();

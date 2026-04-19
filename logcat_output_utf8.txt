@@ -1,2 +1,0 @@
-﻿03-26 06:54:52.829  1464  2529 D PackageManager: set app component=ComponentInfo{com.google.android.apps.messaging/com.google.android.apps.messaging.shared.fcm.impl.BugleFirebaseMessagingService} enabled state: 1 from null,uid=10203,pid=22619
-03-26 08:14:08.749  1464  2145 D PackageManager: set app component=ComponentInfo{com.google.android.apps.messaging/com.google.android.apps.messaging.shared.fcm.impl.BugleFirebaseMessagingService} enabled state: 1 from null,uid=10203,pid=29405

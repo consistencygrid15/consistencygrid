@@ -69,7 +69,7 @@ const getCachedWallpaperGoal = async (userId) => {
             isPinned: true,
             category: true,
             subGoals: {
-                select: { id: true, isCompleted: true },
+                select: { id: true, isCompleted: true, title: true },
             },
         },
     });
@@ -88,7 +88,7 @@ const getCachedWallpaperGoal = async (userId) => {
             isPinned: true,
             category: true,
             subGoals: {
-                select: { id: true, isCompleted: true },
+                select: { id: true, isCompleted: true, title: true },
             },
         },
         orderBy: { createdAt: "desc" },

@@ -194,31 +194,12 @@ export default function WallpaperRenderer() {
             const bgImage = await loadBackgroundImage(settings.customBackgroundUrl);
             drawBackground(ctx, cWidth, cHeight, theme, bgImage);
 
-            // 2. Life Header
-            const birthDate = new Date(settings.dateOfBirth);
-            const lifeExpectancyMs = settings.lifeExpectancyYears * 365.25 * 24 * 60 * 60 * 1000;
-            const ageMs = new Date() - birthDate;
-            const lifeProgressPercent = Math.min(100, Math.max(0, (ageMs / lifeExpectancyMs) * 100));
-
-            drawLifeHeader(ctx, {
-                canvasWidth: cWidth,
-                theme,
-                progress: lifeProgressPercent
-            });
+            // Remove redundant drawLifeHeader call because grid.js already draws the Life Grid unified header!
 
             // 3. Dashboard Header & Streak
             const verticalCursorY = settings.wallpaperType === "lockscreen" ? cHeight * 0.35 : cHeight * 0.12;
 
-            if (settings.showAgeStats) {
-                drawStreakWidget(ctx, {
-                    x: cWidth * 0.92, // Right margin
-                    y: verticalCursorY - 60,
-                    theme,
-                    streak: data.stats.streak,
-                    streakActiveToday: data.stats.streakActiveToday,
-                    hasCustomBg: !!settings.customBackgroundUrl
-                });
-
+            if (settings.showAgeStats && settings.yearGridMode !== "life") {
                 drawDashboardHeader(ctx, {
                     xCoordinate: cWidth * 0.08, // Left margin
                     yCoordinate: verticalCursorY,
@@ -230,13 +211,29 @@ export default function WallpaperRenderer() {
                     streakActiveToday: data.stats.streakActiveToday,
                     hasCustomBg: !!settings.customBackgroundUrl
                 });
+
+                // Move Streak UP to the empty right side of the lockscreen clock!
+                let streakY = settings.wallpaperType === "lockscreen" ? cHeight * 0.30 : verticalCursorY;
+
+                drawStreakWidget(ctx, {
+                    x: cWidth * 0.92, // Right margin
+                    y: streakY,
+                    theme,
+                    streak: data.stats.streak,
+                    streakActiveToday: data.stats.streakActiveToday,
+                    hasCustomBg: !!settings.customBackgroundUrl
+                });
             }
 
+
+
+            let gridStartY = verticalCursorY + (settings.showAgeStats && settings.yearGridMode !== "life" ? 220 : 0);
+            
             // 4. Grid (Middle Section)
             drawGrid(ctx, {
-                xCoordinate: cWidth * 0.08,
-                yCoordinate: verticalCursorY + (settings.showAgeStats ? 250 : 0),
-                width: cWidth * 0.84,
+                xCoordinate: cWidth * 0.10, // Squeeze Grid width
+                yCoordinate: gridStartY,
+                width: cWidth * 0.80,
                 height: cHeight,
                 theme,
                 themeName: settings.theme,
@@ -247,6 +244,26 @@ export default function WallpaperRenderer() {
                 totalHabits: data.stats.totalHabits,
                 reminders: data.data.reminders,
                 now: new Date(),
+                hasCustomBg: !!settings.customBackgroundUrl
+            });
+
+            // 4.5 Bottom Section (Habits and Goals Progress at the Bottom)
+            const bottomSectionHeight = 250;
+            const bottomSectionY = settings.showQuote ? cHeight - 120 - bottomSectionHeight - 40 : cHeight - bottomSectionHeight - 80;
+            
+            drawBottomSection(ctx, {
+                xCoordinate: cWidth * 0.08, // Keep bottom regular width
+                yCoordinate: bottomSectionY,
+                width: cWidth * 0.84,
+                height: bottomSectionHeight,
+                theme,
+                habits: data.data.habits,
+                goals: data.data.goals,
+                settings,
+                reminders: data.data.reminders,
+                nowDay: new Date().toISOString().split('T')[0],
+                now: new Date(),
+                streak: data.stats.streak,
                 hasCustomBg: !!settings.customBackgroundUrl
             });
 

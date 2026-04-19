@@ -5,3 +5,15 @@ windows-app
 cypress
 .agents
 docs
+
+# Exclude large log files and archives
+*log*.txt
+*.sst
+*.zip
+log_all.txt
+log_all_clean.txt
+log_clean.txt
+log_full.txt
+log2.txt
+ConsistencyGrid/
+ConsistencyGrid-Windows.zip

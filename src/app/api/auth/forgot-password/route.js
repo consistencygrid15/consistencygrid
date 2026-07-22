@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 import { randomBytes } from 'crypto';
 import prisma from '@/lib/prisma';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key_for_build');
 
 /**
  * POST /api/auth/forgot-password-new

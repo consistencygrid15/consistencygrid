@@ -170,20 +170,28 @@ export default function SettingsPage() {
 
                                 <button
                                     onClick={handleLogout}
-                                    className="flex items-center justify-between w-full p-4 rounded-xl border border-red-100 bg-red-50/50 hover:bg-red-50 hover:border-red-200 transition-colors group text-red-700"
+                                    className="flex items-center justify-between w-full p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors group text-gray-700"
                                 >
                                     <div className="flex items-center gap-3">
-                                        <div className="p-2 bg-red-100 text-red-600 rounded-lg group-hover:bg-red-200 transition-colors">
+                                        <div className="p-2 bg-gray-100 text-gray-600 rounded-lg group-hover:bg-gray-200 transition-colors">
                                             <LogOut className="w-5 h-5" />
                                         </div>
                                         <div className="text-left">
-                                            <p className="font-semibold">Sign Out</p>
-                                            <p className="text-xs text-red-500/80">Log out of your account on this device</p>
+                                            <p className="font-semibold text-gray-900">Sign Out</p>
+                                            <p className="text-xs text-gray-500">Log out of your account on this device</p>
                                         </div>
                                     </div>
                                 </button>
                             </div>
                         </Card>
+
+                        {/* Danger Zone */}
+                        <div className="pt-2">
+                            <h2 className="text-xs font-bold text-red-600 uppercase tracking-wider mb-3 px-1">
+                                Danger Zone
+                            </h2>
+                            <AccountDeletionComponent />
+                        </div>
                     </div>
                 )}
 

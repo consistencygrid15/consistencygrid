@@ -74,7 +74,7 @@ function getLocalDateString(date) {
  * @param {string} email - User email
  * @returns {Promise<Object|null>} User object with essential fields
  */
-export const getCachedUserByEmail = (email) =>
+const getCachedUserByEmail = (email) =>
     unstable_cache(
         async () => {
             return prisma.user.findUnique({
@@ -102,7 +102,7 @@ export const getCachedUserByEmail = (email) =>
  * Cache full user profile + settings for the /api/settings/me endpoint
  * @param {string} email - User email
  */
-export const getCachedSettingsMe = (email) =>
+const getCachedSettingsMe = (email) =>
     unstable_cache(
         async () => {
             return prisma.user.findUnique({

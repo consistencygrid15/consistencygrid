@@ -7,13 +7,20 @@ import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { requestAccountDeletion } from '@/lib/gdpr';
 
-export default function AccountDeletionComponent() {
-  const [showConfirmation, setShowConfirmation] = useState(false);
+export default function AccountDeletionComponent({ initialOpen = false, onCancel }) {
+  const [showConfirmation, setShowConfirmation] = useState(initialOpen);
   const [hasPassword, setHasPassword] = useState(true);
   const [confirmationInput, setConfirmationInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [step, setStep] = useState(1);
+
+  // Sync initialOpen if prop changes
+  useEffect(() => {
+    if (initialOpen) {
+      setShowConfirmation(true);
+    }
+  }, [initialOpen]);
 
   // Check if user has password on load
   useEffect(() => {
@@ -22,7 +29,7 @@ export default function AccountDeletionComponent() {
         const res = await fetch('/api/settings/me');
         if (res.ok) {
           const data = await res.json();
-          setHasPassword(!!data.user.hasPassword);
+          setHasPassword(!!data.user?.hasPassword);
         }
       } catch (err) {
         console.error('Failed to check auth type:', err);
@@ -78,32 +85,33 @@ export default function AccountDeletionComponent() {
     setConfirmationInput('');
     setError('');
     setStep(1);
+    if (onCancel) onCancel();
   }
 
   if (!showConfirmation) {
     return (
-      <Card className="p-6 border-l-4 border-l-red-500 bg-red-50 shadow-sm">
+      <Card className="p-6 border-l-4 border-l-red-500 bg-red-50/60 shadow-sm">
         <div className="flex items-start gap-4">
           <AlertTriangle className="w-6 h-6 text-red-600 flex-shrink-0 mt-1" />
           <div className="flex-1">
-            <h3 className="text-lg font-bold text-red-900 mb-2">Delete Account Permanentally</h3>
+            <h3 className="text-lg font-bold text-red-900 mb-2">Delete Account Permanently</h3>
             <p className="text-sm text-red-700 mb-4">
               This action is irreversible. All your habits, goals, and history will be wiped clean.
             </p>
 
-            <div className="bg-white/80 p-4 rounded-lg mb-4 text-sm text-gray-700 space-y-2 border border-red-100">
+            <div className="bg-white/90 p-4 rounded-xl mb-4 text-sm text-gray-700 space-y-2 border border-red-100 shadow-sm">
               <p className="font-semibold text-red-900">Once deleted, you lose:</p>
-              <ul className="list-disc list-inside space-y-1">
+              <ul className="list-disc list-inside space-y-1 text-xs text-gray-600">
                 <li>Every goal, habit, and milestone ever tracked</li>
-                <li>Your customized wallpaper settings</li>
-                <li>Subscription access (if any)</li>
+                <li>Your customized wallpaper settings and history</li>
+                <li>Subscription access and saved preferences</li>
                 <li>Account profile and settings</li>
               </ul>
             </div>
 
             <Button
               onClick={() => setShowConfirmation(true)}
-              className="bg-red-600 hover:bg-red-700 text-white border-none shadow-lg shadow-red-200"
+              className="bg-red-600 hover:bg-red-700 text-white border-none shadow-lg shadow-red-200/50"
             >
               <Trash2 className="w-4 h-4 mr-2" />
               Start Deletion Process

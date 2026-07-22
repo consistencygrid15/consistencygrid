@@ -68,6 +68,8 @@ export async function POST(req) {
     const deleteResult = await prisma.$transaction(async tx => {
       // Delete all user-related data in correct order
       await Promise.all([
+        tx.deviceToken.deleteMany({ where: { userId } }),
+        tx.paymentTransaction.deleteMany({ where: { userId } }),
         tx.habitLog.deleteMany({ where: { userId } }),
         tx.habit.deleteMany({ where: { userId } }),
         tx.subGoal.deleteMany({

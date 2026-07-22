@@ -3,7 +3,6 @@ import { withSentryConfig } from '@sentry/nextjs';
 
 const nextConfig = {
   reactCompiler: true,
-  eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
 
   // Image Optimization

@@ -26,7 +26,9 @@ import prisma from "@/lib/prisma";
 export async function POST(request) {
     try {
         const { searchParams } = new URL(request.url);
-        const token = searchParams.get("token");
+        const authHeader = request.headers.get("authorization");
+        const bearerToken = authHeader?.startsWith("Bearer ") ? authHeader.substring(7) : null;
+        const token = searchParams.get("token") || bearerToken;
 
         if (!token) {
             return NextResponse.json({ success: false, error: "Token required" }, { status: 400 });

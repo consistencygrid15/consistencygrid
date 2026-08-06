@@ -6,7 +6,9 @@ export async function POST(request) {
     console.log("[Mobile API] /api/mobile/reminders/sync - Started");
     try {
         const { searchParams } = new URL(request.url);
-        const token = searchParams.get("token");
+        const authHeader = request.headers.get("authorization");
+        const bearerToken = authHeader?.startsWith("Bearer ") ? authHeader.substring(7) : null;
+        const token = searchParams.get("token") || bearerToken;
 
         if (!token) {
             console.error("[Mobile API] No token provided");

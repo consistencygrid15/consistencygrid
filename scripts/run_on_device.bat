@@ -24,7 +24,7 @@ adb install -r app\build\outputs\apk\debug\app-debug.apk
 
 echo.
 echo [4/4] Launching App...
-adb shell am start -n com.consistencygrid/.MainActivity
+adb shell am start -n com.consistencygridwallpaper/.MainActivity
 
 cd ..
 echo.

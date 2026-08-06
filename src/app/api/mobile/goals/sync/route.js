@@ -4,7 +4,9 @@ import { invalidateGoalsCache } from "@/lib/cache-invalidation";
 export async function POST(request) {
     try {
         const { searchParams } = new URL(request.url);
-        const token = searchParams.get("token");
+        const authHeader = request.headers.get("authorization");
+        const bearerToken = authHeader?.startsWith("Bearer ") ? authHeader.substring(7) : null;
+        const token = searchParams.get("token") || bearerToken;
 
         if (!token) {
             return new Response(JSON.stringify({ error: "Token required" }), { status: 400 });

@@ -3,7 +3,7 @@
 import { Play } from "lucide-react";
 
 export const PLAY_STORE_URL =
-  "https://play.google.com/store/apps/details?id=com.consistencygrid";
+  "https://play.google.com/store/apps/details?id=com.consistencygridwallpaper";
 
 export function PlayBadge({ size = "lg", className = "" }) {
   const isLg = size === "lg";

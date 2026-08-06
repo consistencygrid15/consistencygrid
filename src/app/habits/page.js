@@ -21,7 +21,7 @@ export default async function HabitsPage() {
     console.error('[Habits] getUniversalSession failed:', e.message);
   }
 
-  if (!session?.user?.email) redirect("/login");
+  if (!session?.user?.email) redirect("/");
 
   return (
     <DashboardLayout active="Habits">

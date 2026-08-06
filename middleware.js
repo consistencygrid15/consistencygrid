@@ -95,16 +95,14 @@ export async function middleware(req) {
     return NextResponse.next();
   }
 
-  // 2. Unauthenticated access to protected route → redirect to login
+  // 2. Unauthenticated access to protected route → redirect to homepage
   if (!token && !isNativeAndroid && isProtectedRoute) {
-    const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(loginUrl);
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // 3. Already logged in → redirect away from auth routes
-  if (token && isAuthRoute) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+  // 3. Auth routes → redirect away to homepage
+  if (isAuthRoute) {
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
   // 4. Onboarding redirection if not completed

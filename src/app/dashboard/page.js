@@ -34,7 +34,7 @@ export default async function DashboardPage() {
   if (!session) {
     // Check if this might be an Android user whose publicToken cookie didn't persist
     // In that case, redirect to login so they can re-authenticate
-    redirect("/login");
+    redirect("/");
   }
 
   // Redirect to onboarding if user hasn't completed it

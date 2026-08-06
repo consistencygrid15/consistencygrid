@@ -27,8 +27,8 @@
 import Link from "next/link";
 
 export default function Navbar({
-  rightLinkText = "Log in",
-  rightLinkHref = "/login",
+  rightLinkText = "Get App",
+  rightLinkHref = "/download",
 }) {
   return (
     <header className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 py-4 sm:py-5">

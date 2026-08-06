@@ -23,11 +23,11 @@ export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://consistencygrid.com"),
   icons: {
     icon: [
-      { url: "/images/logo.png" },
+      { url: "/images/logo.png?v=2", type: "image/png" },
       { url: "/images/logo.svg", type: "image/svg+xml" },
     ],
-    shortcut: "/images/logo.png",
-    apple: "/images/logo.png",
+    shortcut: "/images/logo.png?v=2",
+    apple: "/images/logo.png?v=2",
   },
   alternates: {
     canonical: "/",
@@ -90,6 +90,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/images/logo.png?v=2" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/images/logo.png?v=2" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/logo.png?v=2" />
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}

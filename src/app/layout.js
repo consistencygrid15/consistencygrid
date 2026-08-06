@@ -21,6 +21,14 @@ export const metadata = {
     telephone: false,
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://consistencygrid.com"),
+  icons: {
+    icon: [
+      { url: "/images/logo.png" },
+      { url: "/images/logo.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
   alternates: {
     canonical: "/",
   },
